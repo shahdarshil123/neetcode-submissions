@@ -1,0 +1,23 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map1 = new HashMap<>();
+        // Map<Integer, List<Integer>> map2 = new HashMap<>();
+
+        for(int num: nums){
+            map1.put(num, map1.getOrDefault(num, 0)+1);
+        }
+
+        List<int[]> arr = new ArrayList<>();
+        for(Map.Entry<Integer, Integer> entry: map1.entrySet()){
+            arr.add(new int[] {entry.getValue(), entry.getKey()});
+        }
+        arr.sort((a,b)->b[0] - a[0]);
+
+        int[] result = new int[k];
+        for(int i=0; i<k; i++){
+            result[i] = arr.get(i)[1];
+        }
+
+        return result;
+    }
+}
